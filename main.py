@@ -1,8 +1,6 @@
 from PyQt5.QtWidgets import QApplication,QWidget,QLabel,QLineEdit,QPushButton,QStatusBar,QVBoxLayout,QHBoxLayout
-#from PyQt5 import QMessageBox
 import sys
 from PIL.ImageQt import ImageQt
-#from PyQt5.QtGui import QFont,QPixmap,QImage
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox
@@ -57,11 +55,21 @@ class QRGen(QWidget):
         
         label=QLabel('Enter Text:')
         label.setFont(font)
-        
         self.textEntry=QLineEdit()
         self.textEntry.setFont(font)
+        self.textEntry1=QLineEdit()
+        self.textEntry1.setFont(font)
         entryLayout.addWidget(label)
         entryLayout.addWidget(self.textEntry)
+        
+        label1=QLabel('Enter File Name')
+        label1.setFont(font)
+        self.textEntry1=QLineEdit()
+        self.textEntry1.setFont(font)
+        entryLayout.addWidget(label1)
+        entryLayout.addWidget(self.textEntry1)
+        
+        
         mainLayout.addLayout(entryLayout)
         
         self.btnGenerate=QPushButton('Generate QR Code')
@@ -91,6 +99,7 @@ class QRGen(QWidget):
     def clear(self):
         self.textEntry.clear()
         self.imageLabel.clear()
+        self.textEntry1.clear()
         
     def create_qr(self):
         text=self.textEntry.text()
@@ -101,7 +110,7 @@ class QRGen(QWidget):
         
     def save(self):
         curdir=os.getcwd()
-        filename=self.textEntry.text()
+        filename=self.textEntry1.text()
         
         if filename:
             self.imageLabel.pixmap().save(os.path.join(curdir,filename+'.png'))
